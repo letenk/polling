@@ -20,11 +20,13 @@ func CalculatePercentage(options []Option) uint64 {
 
 	// Convert votes to percentage
 	var totalRoundedPercent float64
-	for i, option := range options {
-		percent := (float64(option.Votes) / float64(totalVotes)) * 100
-		roundedPercent := math.Round(percent) // Rounded
-		options[i].Percent = roundedPercent
-		totalRoundedPercent += roundedPercent
+	if totalVotes != 0 {
+		for i, option := range options {
+			percent := (float64(option.Votes) / float64(totalVotes)) * 100
+			roundedPercent := math.Round(percent) // Rounded
+			options[i].Percent = roundedPercent
+			totalRoundedPercent += roundedPercent
+		}
 	}
 
 	// Distribute rounding difference
@@ -61,22 +63,22 @@ func main() {
 		{
 			Id:    2,
 			Title: "Buah",
-			Votes: 5,
+			Votes: 8,
 		},
 		{
 			Id:    3,
 			Title: "Sayur",
-			Votes: 80,
+			Votes: 0,
 		},
 		{
 			Id:    4,
 			Title: "Daging",
-			Votes: 1000,
+			Votes: 0,
 		},
 		{
 			Id:    5,
 			Title: "Ayam",
-			Votes: 876,
+			Votes: 0,
 		},
 	}
 
